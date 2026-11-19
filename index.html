@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<!--
+  Lauro Calabria | Portfolio
+  ---------------------------------------------------------------------------
+  Static portfolio page (HTML + CSS + vanilla JavaScript), no build step.
+
+  Translation notes:
+  - The text written in this file is the English (default) content.
+  - Every element with a `data-i18n` attribute is translated at runtime by
+    js/i18n.js using the dictionaries in js/translations.js.
+  - To change a text, edit it here AND in js/translations.js (both languages).
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+    Content Security Policy (CSP).
+    GitHub Pages cannot send custom HTTP headers, so the policy is set here.
+    - Scripts and styles may only come from this site (no inline code).
+    - The only external host allowed is formspree.io (contact form).
+    - Forms may only be submitted to formspree.io.
+    - Plugins (object-src) and <base> tags are disabled.
+  -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://formspree.io; form-action https://formspree.io; base-uri 'none'; object-src 'none'">
+
+  <!-- Send only the site origin (not the full URL) to external sites. -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>Lauro Calabria | Portfolio</title>
+  <meta name="description" content="Portfolio of Lauro Calabria, a junior full-stack developer based in Porto, Portugal. Projects, experience, certificates and contact.">
+  <meta name="author" content="Lauro Calabria">
+  <meta name="theme-color" content="#fafbfd">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Applies the saved/system color theme before the page is painted
+       (prevents a flash of the wrong theme). Intentionally not deferred. -->
+  <script src="js/theme.js"></script>
+
+  <!-- Scripts are deferred: they run after the HTML has been parsed. -->
+  <script src="js/translations.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <!-- Lets keyboard and screen-reader users jump past the navigation. -->
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+  <!-- ====================== Header and navigation ====================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top">Lauro Calabria</a>
+
+      <nav class="site-nav" aria-label="Main" data-i18n-attr="aria-label:nav.label">
+        <ul>
+          <li><a href="#about" data-i18n="nav.about">About</a></li>
+          <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+          <li><a href="#certificates" data-i18n="nav.certificates">Certificates</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <!-- Language selector. Buttons are wired up in js/i18n.js. -->
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.label">
+          <button type="button" class="lang-button" data-lang="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+          <button type="button" class="lang-button" data-lang="pt" lang="pt" aria-label="Português" aria-pressed="false">PT</button>
+        </div>
+
+        <!-- Dark theme toggle. Wired up in js/theme.js. -->
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false"
+                aria-label="Dark theme" title="Dark theme"
+                data-i18n-attr="aria-label:theme.label;title:theme.label">
+          <!-- Moon: shown in the light theme -->
+          <svg class="icon-moon" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          <!-- Sun: shown in the dark theme -->
+          <svg class="icon-sun" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================ Hero ============================ -->
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1 id="hero-title">Lauro Calabria</h1>
+          <p class="hero-role" data-i18n="hero.role">Junior Full-Stack Developer</p>
+          <p class="hero-intro" data-i18n="hero.intro">I enjoy solving problems and turning ideas into code. I build web applications with JavaScript, React, Node.js and Python.</p>
+          <p class="hero-location" data-i18n="hero.location">Based in Porto, Portugal</p>
+
+          <div class="button-row">
+            <a class="button button-primary" href="#contact" data-i18n="hero.hire">Hire me</a>
+            <!-- Replace the PDF in assets/docs/ to update the downloadable CV. -->
+            <a class="button button-secondary" href="assets/docs/Lauro-Calabria-CV.pdf" download data-i18n="hero.cv">Download CV</a>
+          </div>
+        </div>
+
+        <!-- Profile photo. Add your picture as assets/img/profile.jpg.
+             If the file is missing, the "LC" initials are shown instead. -->
+        <div class="hero-photo">
+          <span class="hero-photo-fallback" aria-hidden="true">LC</span>
+          <img id="profile-photo" src="assets/img/profile.jpg" width="480" height="480"
+               alt="Photo of Lauro Calabria" data-i18n-attr="alt:hero.photo.alt">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ About ============================ -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="container section-grid">
+        <h2 id="about-title" class="section-title" data-i18n="about.title">About me</h2>
+
+        <div class="section-body">
+          <p data-i18n="about.p1">I recently completed a 670-hour Full-Stack Developer qualification at SENAI. I'm at the start of my software career, improving through courses and by adding projects to this portfolio. I'm now working on projects such as authentication systems and API integrations.</p>
+          <p data-i18n="about.p2">Before moving into software, I graduated in Dentistry and worked as a café manager. Those roles taught me to solve problems, adapt quickly and stay calm under pressure.</p>
+
+          <dl class="facts">
+            <div class="fact">
+              <dt data-i18n="about.location.label">Location</dt>
+              <dd data-i18n="about.location.value">Porto, Portugal</dd>
+            </div>
+            <div class="fact">
+              <dt data-i18n="about.languages.label">Languages</dt>
+              <dd data-i18n="about.languages.value">English (fluent), Portuguese (native)</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ Skills ============================ -->
+    <section id="skills" class="section" aria-labelledby="skills-title">
+      <div class="container section-grid">
+        <h2 id="skills-title" class="section-title" data-i18n="skills.title">Skills</h2>
+
+        <div class="section-body">
+          <dl class="skill-groups">
+            <div class="skill-group">
+              <dt data-i18n="skills.languages">Languages</dt>
+              <dd>
+                <ul class="tag-list">
+                  <li>JavaScript</li>
+                  <li>TypeScript</li>
+                  <li>Python</li>
+                </ul>
+              </dd>
+            </div>
+
+            <div class="skill-group">
+              <dt data-i18n="skills.frontend">Front-end</dt>
+              <dd>
+                <ul class="tag-list">
+                  <li>React</li>
+                  <li>Angular</li>
+                  <li>HTML</li>
+                  <li>CSS</li>
+                </ul>
+              </dd>
+            </div>
+
+            <div class="skill-group">
+              <dt data-i18n="skills.backend">Back-end</dt>
+              <dd>
+                <ul class="tag-list">
+                  <li>Node.js</li>
+                  <li>Express</li>
+                  <li data-i18n="skills.restapis">REST APIs</li>
+                  <li data-i18n="skills.databases">Databases</li>
+                </ul>
+              </dd>
+            </div>
+
+            <div class="skill-group">
+              <dt data-i18n="skills.practices">Practices and tools</dt>
+              <dd>
+                <ul class="tag-list">
+                  <li>Git</li>
+                  <li>GitHub</li>
+                  <li data-i18n="skills.agile">Agile methodologies</li>
+                  <li data-i18n="skills.testing">Front-end and back-end testing</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ Projects ============================
+         To add a project, copy one <li class="entry"> block, then update the
+         title, description, technologies and repository link. -->
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="container section-grid">
+        <h2 id="projects-title" class="section-title" data-i18n="projects.title">Projects</h2>
+
+        <div class="section-body">
+          <p class="section-intro" data-i18n="projects.intro">Projects from my training and personal practice. The code for each one is public on GitHub.</p>
+
+          <ul class="entry-list">
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title" data-i18n="projects.gamemania.title">Game Mania</h3>
+                <p data-i18n="projects.gamemania.desc">Website project for a game store.</p>
+              </div>
+              <div class="entry-meta">
+                <ul class="tag-list">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                </ul>
+                <a class="text-link" href="https://github.com/LauroCalabria/Site-Game-Mania" target="_blank" rel="noopener noreferrer"><span data-i18n="projects.view">View on GitHub</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title" data-i18n="projects.gamemaniaangular.title">Game Mania (Angular)</h3>
+                <p data-i18n="projects.gamemaniaangular.desc">The Game Mania site built with Angular.</p>
+              </div>
+              <div class="entry-meta">
+                <ul class="tag-list">
+                  <li>TypeScript</li>
+                  <li>Angular</li>
+                </ul>
+                <a class="text-link" href="https://github.com/LauroCalabria/Site-Game-Mania-Angular" target="_blank" rel="noopener noreferrer"><span data-i18n="projects.view">View on GitHub</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title" data-i18n="projects.cursoemvideo.title">Curso em Vídeo website</h3>
+                <p data-i18n="projects.cursoemvideo.desc">Website project.</p>
+              </div>
+              <div class="entry-meta">
+                <ul class="tag-list">
+                  <li>HTML</li>
+                </ul>
+                <a class="text-link" href="https://github.com/LauroCalabria/Projeto-Site-Curso-em-Video" target="_blank" rel="noopener noreferrer"><span data-i18n="projects.view">View on GitHub</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title" data-i18n="projects.python.title">Python exercises</h3>
+                <p data-i18n="projects.python.desc">Python practice exercises.</p>
+              </div>
+              <div class="entry-meta">
+                <ul class="tag-list">
+                  <li>Python</li>
+                </ul>
+                <a class="text-link" href="https://github.com/LauroCalabria/Python-Exercicios" target="_blank" rel="noopener noreferrer"><span data-i18n="projects.view">View on GitHub</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title" data-i18n="projects.versioning.title">Version control and collaboration</h3>
+                <p data-i18n="projects.versioning.desc">Conflict resolution, from the SENAI course.</p>
+              </div>
+              <div class="entry-meta">
+                <ul class="tag-list">
+                  <li>Git</li>
+                </ul>
+                <a class="text-link" href="https://github.com/LauroCalabria/senai-versoes-colaboracoes" target="_blank" rel="noopener noreferrer"><span data-i18n="projects.view">View on GitHub</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title" data-i18n="projects.markdown.title">Markdown exercises</h3>
+                <p data-i18n="projects.markdown.desc">Markdown practice exercises.</p>
+              </div>
+              <div class="entry-meta">
+                <ul class="tag-list">
+                  <li>Markdown</li>
+                </ul>
+                <a class="text-link" href="https://github.com/LauroCalabria/Markdown-Exercicios" target="_blank" rel="noopener noreferrer"><span data-i18n="projects.view">View on GitHub</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+          </ul>
+
+          <p class="section-footnote">
+            <a class="text-link" href="https://github.com/LauroCalabria?tab=repositories" target="_blank" rel="noopener noreferrer"><span data-i18n="projects.more">See all repositories on GitHub</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Experience and education ===================== -->
+    <section id="experience" class="section" aria-labelledby="experience-title">
+      <div class="container section-grid">
+        <h2 id="experience-title" class="section-title" data-i18n="experience.title">Experience and education</h2>
+
+        <div class="section-body">
+          <h3 class="group-title" data-i18n="experience.work.heading">Experience</h3>
+
+          <ol class="timeline">
+            <li class="timeline-item">
+              <p class="timeline-date" data-i18n="experience.training.date">Feb 2025 – Feb 2026</p>
+              <div class="timeline-content">
+                <h4 class="timeline-title" data-i18n="experience.training.title">Full-Stack development training projects</h4>
+                <p class="timeline-org">SENAI</p>
+                <ul class="bullet-list">
+                  <li data-i18n="experience.training.b1">Built responsive web interfaces with HTML, CSS and JavaScript.</li>
+                  <li data-i18n="experience.training.b2">Integrated front-end applications with REST APIs.</li>
+                  <li data-i18n="experience.training.b3">Developed REST APIs for communication between application layers.</li>
+                  <li data-i18n="experience.training.b4">Implemented back-end programming logic and application workflows.</li>
+                  <li data-i18n="experience.training.b5">Used Git for version control and collaborative workflows.</li>
+                  <li data-i18n="experience.training.b6">Tested and debugged front-end and back-end code.</li>
+                  <li data-i18n="experience.training.b7">Applied Agile methodologies during project development.</li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <!-- Dates were not provided: replace this label with them if you want them shown. -->
+              <p class="timeline-date" data-i18n="experience.cafe.date">Outside tech</p>
+              <div class="timeline-content">
+                <h4 class="timeline-title" data-i18n="experience.cafe.title">Café Manager</h4>
+                <p class="timeline-org">Nola Kitchen</p>
+                <ul class="bullet-list">
+                  <li data-i18n="experience.cafe.b1">Led daily operations in a high-demand environment.</li>
+                  <li data-i18n="experience.cafe.b2">Managed team performance and workflow optimization.</li>
+                  <li data-i18n="experience.cafe.b3">Improved service efficiency and customer satisfaction.</li>
+                  <li data-i18n="experience.cafe.b4">Solved operational issues in real time under pressure.</li>
+                </ul>
+              </div>
+            </li>
+          </ol>
+
+          <h3 class="group-title" data-i18n="education.heading">Education</h3>
+
+          <ol class="timeline">
+            <li class="timeline-item">
+              <p class="timeline-date" data-i18n="education.senai.date">Feb 2025 – Feb 2026</p>
+              <div class="timeline-content">
+                <h4 class="timeline-title" data-i18n="education.senai.title">Full-Stack Developer Professional Qualification</h4>
+                <p class="timeline-org" data-i18n="education.senai.org">SENAI Pernambuco</p>
+                <p data-i18n="education.senai.desc">670 hours covering front-end, back-end, REST APIs, testing, version control, databases and agile methodologies.</p>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <p class="timeline-date" data-i18n="education.dentistry.date">Graduated 2023</p>
+              <div class="timeline-content">
+                <h4 class="timeline-title" data-i18n="education.dentistry.title">Bachelor's Degree in Dentistry</h4>
+                <p class="timeline-org" data-i18n="education.dentistry.org">Universidade Federal de Pernambuco</p>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <p class="timeline-date" data-i18n="education.computing.date">2 years (incomplete)</p>
+              <div class="timeline-content">
+                <h4 class="timeline-title" data-i18n="education.computing.title">Computer Engineering</h4>
+                <p data-i18n="education.computing.desc">Coursework in programming logic, discrete mathematics, algebra and analytic geometry.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ Certificates ============================
+         PDF files live in assets/docs/. See README.md for the expected names.
+         To add a certificate, copy one <li class="entry"> block. -->
+    <section id="certificates" class="section" aria-labelledby="certificates-title">
+      <div class="container section-grid">
+        <h2 id="certificates-title" class="section-title" data-i18n="certificates.title">Courses and certificates</h2>
+
+        <div class="section-body">
+          <ul class="entry-list">
+            <!-- SENAI professional qualification -->
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title" data-i18n="certificates.senai.title">Professional Qualification in Full-Stack Programming</h3>
+                <p class="timeline-org" data-i18n="certificates.senai.org">SENAI Pernambuco</p>
+                <p data-i18n="certificates.senai.desc">670 hours, 12 Feb 2025 to 23 Feb 2026. Issued on 9 March 2026.</p>
+                <p class="code-line"><span data-i18n="certificates.validator">Validation code:</span> <code>7d3b2f75-72c3-4819-9692-e2d996b1ed2d</code></p>
+              </div>
+              <div class="entry-meta">
+                <a class="text-link" href="assets/docs/certificate-senai-full-stack.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="certificates.view">View certificate (PDF)</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+                <a class="text-link" href="https://sgeweb.senai.br/documentos" target="_blank" rel="noopener noreferrer"><span data-i18n="certificates.verify">Verify on the SENAI website</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <!-- Python 3 - Mundo 3 -->
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title">Python 3 – Mundo 3</h3>
+                <p class="timeline-org">Curso em Vídeo (Digirati Informática, Serviços e Telecomunicações LTDA)</p>
+                <p data-i18n="certificates.python3.desc">40-hour video course, completed on 7 August 2026.</p>
+                <p class="code-line"><span data-i18n="certificates.code">Certificate code:</span> <code>10E412-685A-7</code></p>
+              </div>
+              <div class="entry-meta">
+                <a class="text-link" href="assets/docs/certificate-python-3-mundo-3.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="certificates.view">View certificate (PDF)</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <!-- Python AI Development (Mimo) -->
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title">Python AI Development</h3>
+                <p class="timeline-org">Mimo</p>
+                <p data-i18n="certificates.ai.desc">Covers Python essentials, functional and object-oriented programming, scripts, modules and APIs, and working with LLMs. Issued on 14 April 2026.</p>
+              </div>
+              <div class="entry-meta">
+                <a class="text-link" href="assets/docs/certificate-python-ai-development.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="certificates.view">View certificate (PDF)</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <!-- Python 3 - Mundo 2 -->
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title">Python 3 – Mundo 2</h3>
+                <p class="timeline-org">Curso em Vídeo (Digirati Informática, Serviços e Telecomunicações LTDA)</p>
+                <p data-i18n="certificates.python2.desc">40-hour video course, completed on 24 March 2026.</p>
+                <p class="code-line"><span data-i18n="certificates.code">Certificate code:</span> <code>10E412-67AC-4</code></p>
+              </div>
+              <div class="entry-meta">
+                <a class="text-link" href="assets/docs/certificate-python-3-mundo-2.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="certificates.view">View certificate (PDF)</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <!-- Git and GitHub -->
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title" data-i18n="certificates.git.title">Git and GitHub</h3>
+                <p class="timeline-org">Curso em Vídeo (Digirati Informática, Serviços e Telecomunicações LTDA)</p>
+                <p data-i18n="certificates.git.desc">20-hour video course, completed on 7 February 2025.</p>
+                <p class="code-line"><span data-i18n="certificates.code">Certificate code:</span> <code>10E412-A18C-A</code></p>
+              </div>
+              <div class="entry-meta">
+                <a class="text-link" href="assets/docs/certificate-git-github.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="certificates.view">View certificate (PDF)</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+
+            <!-- Python 3 - Mundo 1 -->
+            <li class="entry">
+              <div class="entry-main">
+                <h3 class="entry-title">Python 3 – Mundo 1</h3>
+                <p class="timeline-org">Curso em Vídeo (Digirati Informática, Serviços e Telecomunicações LTDA)</p>
+                <p data-i18n="certificates.python1.desc">40-hour video course, completed on 2 February 2025.</p>
+                <p class="code-line"><span data-i18n="certificates.code">Certificate code:</span> <code>10E412-66E2-1</code></p>
+              </div>
+              <div class="entry-meta">
+                <a class="text-link" href="assets/docs/certificate-python-3-mundo-1.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="certificates.view">View certificate (PDF)</span><span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ Contact ============================ -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="container section-grid">
+        <h2 id="contact-title" class="section-title" data-i18n="contact.title">Hire me</h2>
+
+        <div class="section-body contact-grid">
+          <div class="contact-intro">
+            <p data-i18n="contact.text">Have an opportunity or a project in mind? Send me a message and it will arrive directly in my inbox.</p>
+
+            <ul class="contact-links">
+              <li>
+                <span class="contact-label">Email</span>
+                <a class="text-link" href="mailto:calabrialauro@gmail.com">calabrialauro@gmail.com</a>
+              </li>
+              <li>
+                <span class="contact-label">LinkedIn</span>
+                <a class="text-link" href="https://www.linkedin.com/in/lauro-calabria/" target="_blank" rel="noopener noreferrer">linkedin.com/in/lauro-calabria<span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </li>
+              <li>
+                <span class="contact-label">GitHub</span>
+                <a class="text-link" href="https://github.com/LauroCalabria" target="_blank" rel="noopener noreferrer">github.com/LauroCalabria<span class="visually-hidden" data-i18n="common.newtab"> (opens in a new tab)</span></a>
+              </li>
+            </ul>
+          </div>
+
+          <!--
+            Contact form, delivered by Formspree (https://formspree.io).
+            The form ID in the action attribute (xoedlzkl) identifies this form
+            in the Formspree dashboard, where the destination email is set.
+            If the action is ever replaced by an invalid value, js/main.js falls
+            back to opening the visitor's email app.
+            The "_gotcha" field is a hidden honeypot that catches spam bots.
+          -->
+          <form id="contact-form" class="contact-form"
+                action="https://formspree.io/f/xoedlzkl" method="POST"
+                data-email="calabrialauro@gmail.com" novalidate>
+
+            <div class="field">
+              <label for="contact-name" data-i18n="contact.form.name">Your name</label>
+              <input id="contact-name" name="name" type="text" autocomplete="name"
+                     required minlength="2" maxlength="100">
+            </div>
+
+            <div class="field">
+              <label for="contact-email" data-i18n="contact.form.email">Your email</label>
+              <input id="contact-email" name="email" type="email" autocomplete="email"
+                     required maxlength="254">
+            </div>
+
+            <div class="field">
+              <label for="contact-message" data-i18n="contact.form.message">Message</label>
+              <textarea id="contact-message" name="message" rows="6"
+                        required minlength="10" maxlength="2000"></textarea>
+            </div>
+
+            <!-- Honeypot: hidden from people, often filled in by bots. -->
+            <div class="hp" aria-hidden="true">
+              <label for="contact-gotcha">Leave this field empty</label>
+              <input id="contact-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button class="button button-primary" type="submit" data-i18n="contact.form.send">Send message</button>
+
+            <!-- Announces sending, success and error messages to screen readers. -->
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Back-to-top button: appears after scrolling down (see js/main.js). -->
+  <a id="back-to-top" class="back-to-top" href="#top" hidden
+     aria-label="Back to top" title="Back to top"
+     data-i18n-attr="aria-label:backtotop.label;title:backtotop.label">
+    <svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24">
+      <path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year">2026</span> Lauro Calabria</p>
+    </div>
+  </footer>
+</body>
+</html>
